@@ -6,7 +6,7 @@ const Home = () => {
     const handleClick = async() => {
         try{
             //call API
-            const response = await fetch('/data'); // Make a GET request to the API endpoint
+            const response = await fetch('http://localhost:3001/data'); // Make a GET request to the API endpoint
             console.log("response", response)
             const data = await response.json(); // Parse the JSON response
             setApiResponse(data.message);

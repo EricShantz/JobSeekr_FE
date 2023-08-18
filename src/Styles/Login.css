@@ -1,0 +1,68 @@
+.login-page{
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+}
+
+.login-form-container{
+    grid-column: 1;
+    margin: auto;
+}
+
+.login-image-container{
+   grid-column: 2;
+   height: 100vh;
+   background: url('../Assets/loginImage.png') no-repeat center center;
+   background-size: cover;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.login-logo{
+    display: flex;
+    flex-direction: row;
+}
+
+.login-logo > img {
+    width: 2rem;
+    height: 2rem;
+    margin-top: 0.7rem;
+}
+
+.login-logo > p{
+    margin-bottom: -1.2rem;
+}
+
+.login-title{
+    margin-bottom: 1rem;
+}
+
+.login-title > h2{
+    margin-bottom: -0.5rem;
+}
+
+.login-textfield{
+    width: 100%;
+    margin-top: 0.5rem !important;
+}
+
+.keepCheckedIn{
+    display: flex;
+    flex-direction: row;
+}
+
+.forgot-password{
+    margin-top: 1rem;
+}
+
+.keepCheckedIn > input{
+    margin-right: 0.5rem;
+}
+
