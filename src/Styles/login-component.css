@@ -44,6 +44,9 @@
 .forgot-password{
     margin-top: -1rem;
     margin-bottom: 1rem;
+    color: blue;
+    text-decoration: blue;
+    cursor: pointer;
 }
 
 .keepCheckedIn > input{

@@ -6,12 +6,10 @@ import { ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { DisplayLoginError, DisplayLoginIncorrect} from "../Utils/ToastMessages";
 import { loginUser } from "../API/userAPIs";
-import { useUserContext } from '../Utils/UserContext'; // Import the custom hook
-
-
+import { useUserContext } from '../Utils/UserContext'
 import "../Styles/login-component.css"
 
-const LoginForm = ({toggleLoginForm}) => {
+const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
     const [email, setEmail] = useState("")
     const [emailError, setEmailError] = useState("")
 
@@ -25,6 +23,10 @@ const LoginForm = ({toggleLoginForm}) => {
 
     const handleSignupClick = () => {
         toggleLoginForm()
+    }
+
+    const handleForgotPasswordClick = () => {
+        toggleForgotPasswordForm()
     }
 
     const handleLogIn = async() => {
@@ -116,10 +118,12 @@ const LoginForm = ({toggleLoginForm}) => {
                       setPasswordError(false);
                     }}
                 />
-        <a href="#" className="forgot-password">Forgot Password</a>
+        <p className="forgot-password" onClick={handleForgotPasswordClick}>Forgot Password</p>
         <div className="keepCheckedIn">
             <input type="checkbox"></input>
             <p>Keep me signed in</p>
+            {/* TODO: figure out how to use keep me signed in */}
+            {/* TODO: figure out how not to log out on reload */}
         </div>
         <Button variant="contained" onClick={handleLogIn}>Continue</Button>
         <div className="sign-up">
