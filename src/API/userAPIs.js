@@ -1,9 +1,9 @@
-
+const base_url = 'http://localhost:3001'
 
 //================ Register User ==================
 export async function registerUser(user_firstName, user_lastName, user_email, user_password){
   try{
-      const response = await fetch(`http://localhost:3001/register`, {
+      const response = await fetch(`${base_url}/register`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -21,6 +21,27 @@ export async function registerUser(user_firstName, user_lastName, user_email, us
   } catch (err){
     //will catch if theres a problem completing the fetch (unable to complete)
     console.error('An error occurred:', err);
+  }
+}
+
+//=============== Login User ==========================
+export async function loginUser(user_email, user_password){
+  try{
+    const response = await fetch(`${base_url}/loginUser`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: user_email,
+        password: user_password
+      })
+    })
+
+    return response
+
+  } catch (err){
+    console.error("An error occurred", err)
   }
 }
 
