@@ -5,8 +5,8 @@ import tirangle_logo from "../Assets/triangle_logo.PNG"
 import { ArrowBack } from '@mui/icons-material';
 import { registerUser } from "../API/userAPIs";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import { DisplayLoginError, DisplayEmailExistsError } from "../Utils/ToastMessages";
+import { ToastContainer } from 'react-toastify';
+import { DisplaySigninError, DisplayEmailExistsError } from "../Utils/ToastMessages";
 import 'react-toastify/dist/ReactToastify.css';
 import "../Styles/signup-component.css"
 
@@ -35,19 +35,25 @@ const SignupForm = ({toggleLoginForm}) => {
     const handleCreateAccount = async() => {
         if(formValidator()){
             try{
-                const response =  await registerUser(firstName, lastName, email, password)
+                let response =  await registerUser(firstName, lastName, email, password)
                 if(response.ok){
-                    //TODO: fetch thats users info
-                    navigate("/home")
+                    response = await response.json()
+                    const user = {
+                        user_id: response.user.user_id,
+                        firstName: response.user.first_name,
+                        lastName: response.user.last_name,
+                        created_at: response.user.created_at,
+                    }
+                    navigate(`/home/${user.firstName}`)
                 } else {
                     if(response.status === 409){ //set error to 409 on the backend if that email has been used
                         DisplayEmailExistsError()
                     } else {
-                        DisplayLoginError();
+                        DisplaySigninError();
                     }
                 }
             } catch(err){
-                DisplayLoginError();
+                DisplaySigninError();
             }
         }
     }
