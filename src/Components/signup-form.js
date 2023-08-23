@@ -6,16 +6,26 @@ import { ArrowBack } from '@mui/icons-material';
 import { registerUser } from "../API/userAPIs";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import { DisplayLoginError } from "../Utils/ToastMessages";
+import { DisplayLoginError, DisplayEmailExistsError } from "../Utils/ToastMessages";
 import 'react-toastify/dist/ReactToastify.css';
 import "../Styles/signup-component.css"
 
 const SignupForm = ({toggleLoginForm}) => {
     const [firstName, setFirstName] = useState("")
+    const [firstNameError, setFirstNameError] = useState(false)
+
     const [lastName, setLastName] = useState("")
+    const [lastNameError, setLastNameError] = useState(false)
+
     const [email, setEmail] = useState("")
+    const [emailError, setEmailError] = useState(false)
+
     const [password, setPassword] = useState("")
+    const [passwordError, setPasswordError] = useState(false)
+
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [confirmPasswordError, setConfirmPasswordError] = useState(false)
+
     const navigate = useNavigate()
 
     const handleBackClick = () => {
@@ -23,24 +33,62 @@ const SignupForm = ({toggleLoginForm}) => {
     }
 
     const handleCreateAccount = async() => {
-        //TODO: check email format
-        if(firstName != "" && lastName != "" && email != "" && password != "" && confirmPassword != "" && password === confirmPassword){
+        if(formValidator()){
             try{
                 const response =  await registerUser(firstName, lastName, email, password)
-
                 if(response.ok){
+                    //TODO: fetch thats users info
                     navigate("/home")
                 } else {
-                    DisplayLoginError();
+                    if(response.status === 409){ //set error to 409 on the backend if that email has been used
+                        DisplayEmailExistsError()
+                    } else {
+                        DisplayLoginError();
+                    }
                 }
-
             } catch(err){
                 DisplayLoginError();
             }
-        } else {
-            //TODO: show which part of the sign-up is incorrect - e.g. missing email or mismatched password
         }
     }
+
+    const formValidator = () => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let isValid = true
+      
+        if (firstName === "") {
+          setFirstNameError(true)
+          isValid = false;
+        }
+      
+        if (lastName === "") {
+            setLastNameError(true)
+            isValid = false;
+        }
+      
+        if (!emailRegex.test(email)) {
+            setEmailError(true)
+            isValid = false;
+        }
+      
+        if (password === "") {
+            setPasswordError(true)
+            isValid = false;
+        }
+      
+        if (confirmPassword === "") {
+            setConfirmPasswordError(true)
+            isValid = false;
+        }
+      
+        if (password !== confirmPassword) {
+            setConfirmPasswordError(true)
+            isValid = false;
+        }
+      
+        return isValid;
+      };
+      
 
     return(
         <div>
@@ -62,39 +110,80 @@ const SignupForm = ({toggleLoginForm}) => {
                 </div>
 
                 <div className="name-field">
-                    <TextField
-                        className="name-textfield"
-                        id="outlined-required"
-                        label="First Name"
-                        onChange={(event)=>{setFirstName(event.target.value)}}
-                    />
-                    <TextField
-                        className="name-textfield"
-                        id="outlined-required"
-                        label="Last Name"
-                        onChange={(event)=>{setLastName(event.target.value)}}
-                    />
+                <TextField
+                    className={`name-textfield`}
+                    id="outlined-error"
+                    label="First Name"
+                    error={firstNameError} // Set error state
+                    helperText={firstNameError ? 'Please input a first name' : ''} // Optional error message
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                      setFirstName(event.target.value);
+                      setFirstNameError(false);
+                    }}
+                />
+
+                <TextField
+                    className={`name-textfield`}
+                    id="outlined-error"
+                    label="Last Name"
+                    error={lastNameError} // Set error state
+                    helperText={lastNameError ? 'Please input a last name' : ''} // Optional error message
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                      setLastName(event.target.value);
+                      setLastNameError(false);
+                    }}
+                />
                 </div>
 
                 <TextField
-                    className="signup-textfield"
-                    id="outlined-required"
+                    className={`signup-textfield`}
+                    id="outlined-error"
                     label="Email"
-                    onChange={(event)=>{setEmail(event.target.value)}}
+                    error={emailError} // Set error state
+                    helperText={emailError ? 'Please input a valid email address' : ''} // Optional error message
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                      setEmailError(false);
+                    }}
                 />
                 <TextField
-                    className="signup-textfield"
-                    id="outlined-required"
+                    className={`signup-textfield`}
+                    id="outlined-error"
                     label="Password"
                     type="password"
-                    onChange={(event)=>{setPassword(event.target.value)}}
+                    error={passwordError} // Set error state
+                    helperText={passwordError ? 'Please input a password' : ''} // Optional error message
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                      setPasswordError(false);
+                    }}
                 />
                 <TextField
-                    className="signup-textfield"
-                    id="outlined-required"
+                    className={`signup-textfield`}
+                    id="outlined-error"
                     label="Confirm Password"
                     type="password"
-                    onChange={(event)=>{setConfirmPassword(event.target.value)}}
+                    error={confirmPasswordError} // Set error state
+                    helperText={confirmPasswordError ? 'Your passwords don\'t match.' : ''} // Optional error message
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                      setConfirmPassword(event.target.value);
+                      setConfirmPasswordError(false);
+                    }}
                 />
 
             <Button variant="contained" onClick={handleCreateAccount}>Create Account</Button>
