@@ -48,3 +48,39 @@ export const DisplayEmailExistsError = () => {
     theme: "light",
     });
 }
+export const DisplayPasswordResetLinkSent = () => {
+    return toast.success('A link to reset your password has been sent to your email.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
+export const DisplayNoEmailExists = () => {
+    return toast.error('No user with that email was found. Please try again.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
+export const DisplaySomethingWentWrong = () => {
+    return toast.error('Something went wrong. Please try again.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}

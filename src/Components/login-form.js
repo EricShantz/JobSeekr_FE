@@ -9,7 +9,7 @@ import { loginUser } from "../API/userAPIs";
 import { useUserContext } from '../Utils/UserContext'
 import "../Styles/login-component.css"
 
-const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
+const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
     const [email, setEmail] = useState("")
     const [emailError, setEmailError] = useState("")
 
@@ -22,7 +22,7 @@ const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
     const navigate = useNavigate()
 
     const handleSignupClick = () => {
-        toggleLoginForm()
+        toggleShowSignupForm()
     }
 
     const handleForgotPasswordClick = () => {

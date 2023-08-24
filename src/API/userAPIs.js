@@ -44,6 +44,38 @@ export async function loginUser(user_email, user_password){
     console.error("An error occurred", err)
   }
 }
+//=============== Forgot Password ==========================
+export async function forgotPassword (email){
+  try{
+    const response = await fetch(`${base_url}/forgotPassword`,{
+      //TODO: call backend to handle password token stuff
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email
+      })
+    })
+    return response
+  } catch (err){
+    console.error("An error occurred", err)
+  }
+}
+
+//=============== Reset Password ===========================
+export async function resetPassword (){
+  //TODO: call backend to handle password reset stuff
+  const response = await fetch(`${base_url}/resetPassword`,{
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: {
+      // ...password
+    }
+  })
+}
 
 
 // ================ Fetch User Data ==================
