@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import tirangle_logo from "../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { DisplayLoginError, DisplayLoginIncorrect} from "../Utils/ToastMessages";
+import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong} from "../Utils/ToastMessages";
 import { loginUser } from "../API/userAPIs";
 import { useUserContext } from '../Utils/UserContext'
 import "../Styles/login-component.css"
@@ -55,6 +55,7 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
                 }
 
             }catch (err){
+                DisplaySomethingWentWrong()
                 console.error("Something went wrong",err)
             }
         }

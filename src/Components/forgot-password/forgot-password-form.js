@@ -31,6 +31,7 @@ const ForgotPasswordForm = ({toggleShowPasswordLinkSent, toggleLoginForm}) => {
                 }
             } catch (err){
                 //TODO: handle errors
+                DisplaySomethingWentWrong()
                 console.error("Something went wrong", err)
             }
         }

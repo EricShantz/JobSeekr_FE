@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
+import { DisplaySomethingWentWrong } from "../../Utils/ToastMessages";
 import { useParams } from 'react-router-dom';
 import {updatePasswordWithResetToken} from "../../API/userAPIs"
 
@@ -29,15 +30,15 @@ const PasswordResetForm = ({togglePasswordResetForm}) => {
     const handleReset = async () => {
         if(formValidator()){
             try{
-            // TODO: call api to change password in the db
             const response = await updatePasswordWithResetToken(resetToken, password, confirmPassword)
                 if(response.ok){
                     togglePasswordResetForm()
                 } else {
-
+                    DisplaySomethingWentWrong()
                 } 
             } catch (err){
-
+                DisplaySomethingWentWrong()
+                console.error("something went wrong:", err)
             }
         }
     }
