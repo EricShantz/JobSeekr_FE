@@ -6,15 +6,18 @@ import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import {updatePasswordWithResetToken} from "../../API/userAPIs"
+
 import "../../Styles/forgot-password-component.css"
 
 
-const PasswordResetForm = () => {
+const PasswordResetForm = ({togglePasswordResetForm}) => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [confirmPasswordError, setConfirmPasswordError] = useState("")
     const { resetToken } = useParams();
+
 
     const navigate = useNavigate()
 
@@ -23,11 +26,16 @@ const PasswordResetForm = () => {
         navigate(`/`)
     }
 
-    const handleReset = () => {
+    const handleReset = async () => {
         if(formValidator()){
             try{
             // TODO: call api to change password in the db
+            const response = await updatePasswordWithResetToken(resetToken, password, confirmPassword)
+                if(response.ok){
+                    togglePasswordResetForm()
+                } else {
 
+                } 
             } catch (err){
 
             }

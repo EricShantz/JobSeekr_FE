@@ -35,8 +35,6 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
                 let response = await loginUser(email, password)
                 if(response.ok){
                     response = await response.json()
-                    //Set user to context
-                    console.log(response)
                     const user = {
                         user_id: response.user.user_id,
                         firstName: response.user.first_name,

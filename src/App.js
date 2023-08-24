@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route path="/home/:firstName" element={<Home />} />
-          <Route path="/password-reset/:reset_token" element={<PasswordReset />} />
+          <Route path="/password-reset/:resetToken" element={<PasswordReset />} />
         </Routes>
       </UserProvider>
     </Router>

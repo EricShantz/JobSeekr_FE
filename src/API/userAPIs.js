@@ -64,17 +64,25 @@ export async function forgotPassword (email){
 }
 
 //=============== Reset Password ===========================
-export async function resetPassword (){
-  //TODO: call backend to handle password reset stuff
-  const response = await fetch(`${base_url}/resetPassword`,{
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: {
-      // ...password
-    }
-  })
+export async function updatePasswordWithResetToken(reset_token, password, confirm_password){
+  try{
+    const response = await fetch(`${base_url}/resetPassword`,{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        reset_token: reset_token,
+        password: password,
+        confirm_password: confirm_password
+      })
+    })
+
+    return response
+
+  } catch(err){
+    console.error("An error occurred", err)
+  }
 }
 
 

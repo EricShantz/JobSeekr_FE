@@ -20,7 +20,6 @@ const ForgotPasswordForm = ({toggleShowPasswordLinkSent, toggleLoginForm}) => {
         if(formValidator()){
             try{           
                 const response = await forgotPassword(email)
-                console.log("Response",response)
                 if(response.ok){
                     toggleShowPasswordLinkSent()
                 } else {
