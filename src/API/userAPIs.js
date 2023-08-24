@@ -48,7 +48,6 @@ export async function loginUser(user_email, user_password){
 export async function forgotPassword (email){
   try{
     const response = await fetch(`${base_url}/forgotPassword`,{
-      //TODO: call backend to handle password token stuff
       method:"POST",
       headers: {
         'Content-Type': 'application/json'
