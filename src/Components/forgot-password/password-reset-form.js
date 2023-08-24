@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import { DisplayLoginError, DisplayLoginIncorrect} from "../../Utils/ToastMessages";
+import { useParams } from 'react-router-dom';
 import "../../Styles/forgot-password-component.css"
 
 
@@ -14,6 +14,7 @@ const PasswordResetForm = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [confirmPasswordError, setConfirmPasswordError] = useState("")
+    const { resetToken } = useParams();
 
     const navigate = useNavigate()
 
@@ -25,13 +26,12 @@ const PasswordResetForm = () => {
     const handleReset = () => {
         if(formValidator()){
             try{
-            //call api to change password in the db
+            // TODO: call api to change password in the db
 
             } catch (err){
 
             }
         }
-
     }
 
     const formValidator = () => {

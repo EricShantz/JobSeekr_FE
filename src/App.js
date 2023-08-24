@@ -7,18 +7,18 @@ import PasswordReset from './Pages/PasswordReset';
 import '../src/Styles/App.css';
 
 function App() {
-
   return (
     <Router>
       <UserProvider>
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route path="/home/:firstName" element={<Home />} />
-          <Route path="/password-reset" element={<PasswordReset />} />
+          <Route path="/password-reset/:reset_token" element={<PasswordReset />} />
         </Routes>
       </UserProvider>
     </Router>
   );
 }
+
 
 export default App;

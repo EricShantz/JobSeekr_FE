@@ -47,7 +47,7 @@ const Login = () => {
                 ) : null}
 
                 {showForgotPassword ? ( // show forgot password form
-                    <ForgotPasswordForm toggleForgotPasswordForm={toggleForgotPasswordForm} toggleShowPasswordLinkSent={toggleShowPasswordLinkSent} toggleLoginForm={toggleLoginForm}/>
+                    <ForgotPasswordForm toggleShowPasswordLinkSent={toggleShowPasswordLinkSent} toggleLoginForm={toggleLoginForm}/>
                 ) : null}
 
                 {!showLoginForm && !showForgotPassword && !showPasswordLinkSent && showSignUpForm ? ( // show signup form

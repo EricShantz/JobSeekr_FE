@@ -4,10 +4,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
-import { DisplayPasswordResetLinkSent, DisplayNoEmailExists, DisplaySomethingWentWrong } from "../../Utils/ToastMessages";
+import { DisplayNoEmailExists, DisplaySomethingWentWrong } from "../../Utils/ToastMessages";
 import "../../Styles/forgot-password-component.css"
 import { forgotPassword } from "../../API/userAPIs";
-
 
 const ForgotPasswordForm = ({toggleShowPasswordLinkSent, toggleLoginForm}) => {
     const [email, setEmail] = useState("")
@@ -33,10 +32,9 @@ const ForgotPasswordForm = ({toggleShowPasswordLinkSent, toggleLoginForm}) => {
                 }
             } catch (err){
                 //TODO: handle errors
-                console.error("Someething went wrong", err)
+                console.error("Something went wrong", err)
             }
         }
-
     }
 
     const formValidator = () => {
