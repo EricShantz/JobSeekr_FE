@@ -38,12 +38,14 @@ export async function loginUser(user_email, user_password){
       })
     })
 
+    //set JWT to localstorage?
     return response
 
   } catch (err){
     console.error("An error occurred", err)
   }
 }
+
 //=============== Forgot Password ==========================
 export async function forgotPassword (email){
   try{
@@ -84,9 +86,3 @@ export async function updatePasswordWithResetToken(reset_token, password, confir
   }
 }
 
-
-// ================ Fetch User Data ==================
-export async function fetchUserData() {
-  const response = await fetch(`http://localhost:3001/user`);
-  return response.json();
-}
