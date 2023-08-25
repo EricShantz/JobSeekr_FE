@@ -1,0 +1,72 @@
+.not-found-page{
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+}
+
+.not-found-image-container{
+   grid-column: 2;
+   height: 100vh;
+   background: url('../Assets/loginImage.png') no-repeat center center;
+   background-size: cover;
+}
+
+.not-found-form-container{
+    grid-column: 1;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.not-found-logo{
+    display: flex;
+    flex-direction: row;
+}
+
+.not-found-logo > img {
+    width: 2rem;
+    height: 2rem;
+    margin-top: 0.7rem;
+}
+
+.not-found-logo > p{
+    margin-bottom: -1.2rem;
+}
+
+.not-found-title{
+    margin-bottom: 1rem;
+}
+
+.not-found-title > h2{
+    margin-bottom: -0.5rem;
+}
+
+/* ============== Media Queries =============== */
+@media (max-width: 899px) {
+    .not-found-page{
+        display: grid;
+        grid-template-columns: 5fr 4fr;
+    }
+}
+@media (max-width: 599px) {
+
+    .not-found-page{
+        grid-template-columns: 1fr;
+    }
+    .not-found-image-container{
+        display: none;
+    }
+
+    .not-found-form-container{
+        display: flex;
+        justify-content: center;        
+    }
+
+    .not-found-form{
+        margin-top: 5vh;
+    }
+}
