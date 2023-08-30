@@ -3,6 +3,17 @@
     flex-direction: row;
 }
 
+.title-div>h3{
+    margin-top: 1rem;
+    margin-left: -2rem;
+}
+
+.triangle-logo{
+    transform: scale(0.25);
+    margin-top: -2rem;
+    margin-left: -2rem;
+}
+
 .dashboard-button{
 
 }
