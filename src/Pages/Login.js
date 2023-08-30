@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import '../Styles/Login.css';
-import LoginForm from "../Components/login-form";
-import SignupForm from "../Components/signup-form";
-import ForgotPasswordForm from "../Components/forgot-password/forgot-password-form";
-import PasswordLinkSent from "../Components/forgot-password/password-link-sent"
+import LoginForm from "../Components/LoginPageComponents/login-form";
+import SignupForm from "../Components/LoginPageComponents/signup-form";
+import ForgotPasswordForm from "../Components/LoginPageComponents/forgot-password-form";
+import PasswordLinkSent from "../Components/LoginPageComponents/password-link-sent"
+import "../Styles/LoginPageComponents/Login.css"
+
 
 
 const Login = () => {

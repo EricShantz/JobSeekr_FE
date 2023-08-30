@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import tirangle_logo from "../Assets/triangle_logo.PNG"
+import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ArrowBack } from '@mui/icons-material';
-import { registerUser } from "../API/userAPIs";
+import { registerUser } from "../../API/userAPIs";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import { DisplaySigninError, DisplayEmailExistsError } from "../Utils/ToastMessages";
+import { DisplaySigninError, DisplayEmailExistsError } from "../../Utils/ToastMessages";
 import 'react-toastify/dist/ReactToastify.css';
-import "../Styles/signup-component.css"
+import "../../Styles/LoginPageComponents/signup-component.css"
+
 
 const SignupForm = ({toggleLoginForm}) => {
     const [firstName, setFirstName] = useState("")

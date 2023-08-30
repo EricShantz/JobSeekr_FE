@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
 import { DisplayNoEmailExists, DisplaySomethingWentWrong } from "../../Utils/ToastMessages";
-import "../../Styles/forgot-password-component.css"
+import "../../Styles/LoginPageComponents/forgot-password-component.css"
+
 import { forgotPassword } from "../../API/userAPIs";
 
 const ForgotPasswordForm = ({toggleShowPasswordLinkSent, toggleLoginForm}) => {

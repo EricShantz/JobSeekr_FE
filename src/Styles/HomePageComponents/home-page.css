@@ -1,0 +1,63 @@
+.sidebar {
+    height: 100vh;
+    width: 15%;
+    background-color: grey;
+}
+
+.searchbar-hamburger-stack{
+    display: flex;
+    flex-direction: row;
+}
+  
+.searchbar-mainContent-stack{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(253, 209, 150);
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-icon{
+    margin: 1.3rem 0rem 0rem 1rem;
+    transform: scale(1.3);
+}
+
+.home-page{
+    display: flex;
+    flex-direction: row;
+    height: auto;
+}
+
+.hamburger-menu{
+    height: 100vh;
+    width:70vw;
+    background-color: aquamarine;
+    z-index:100;
+    /* transform: translateX(-100rem) */
+}
+
+.searchbar{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+
+@media (max-width: 1199px) {
+    .sidebar{
+        width: 20%;
+    }
+}
+
+@media (max-width: 949px) {
+    .sidebar{
+        width: 25%;
+    }
+}
+@media (max-width: 799px) {
+    .sidebar{
+        width: 30%;
+    }
+}

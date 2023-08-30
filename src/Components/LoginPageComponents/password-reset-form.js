@@ -8,8 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import { DisplaySomethingWentWrong } from "../../Utils/ToastMessages";
 import { useParams } from 'react-router-dom';
 import {updatePasswordWithResetToken} from "../../API/userAPIs"
+import "../../Styles/LoginPageComponents/forgot-password-component.css"
 
-import "../../Styles/forgot-password-component.css"
 
 
 const PasswordResetForm = ({togglePasswordResetForm}) => {

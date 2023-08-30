@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import '../Styles/Login.css';
-import PasswordResetForm from "../Components/forgot-password/password-reset-form";
-import PasswordResetSuccess from "../Components/forgot-password/password-reset-success";
+import PasswordResetForm from "../Components/LoginPageComponents/password-reset-form";
+import PasswordResetSuccess from "../Components/LoginPageComponents/password-reset-success";
+import "../Styles/LoginPageComponents/Login.css"
 
 
 const PasswordReset = () => {

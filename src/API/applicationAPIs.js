@@ -1,14 +1,12 @@
 const base_url = 'http://localhost:3001'
-
 //since the user is logged in, make sure to include the JWT in the header
-
 
 export async function fetchUserApplications(user_email, user_password){
 try{
   const token = localStorage.getItem('JWT');
   if (!token) {
-    // Token is missing, redirect to the login page
     //TODO: look into implementing refresh tokens if the user clicked (keep me signed in) etc etc
+    //if token is missing, redirect to the login page
     window.location.href = '/';
     return;
   }
@@ -24,6 +22,7 @@ try{
     })
   })
   
+  //TODO: if response.status === 401 (token expired/missing on backend), log user out
   return response
 }catch(err){
   console.error("There was an error: ", err)

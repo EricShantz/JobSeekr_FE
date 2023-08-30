@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import tirangle_logo from "../Assets/triangle_logo.PNG"
+import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong} from "../Utils/ToastMessages";
-import { loginUser } from "../API/userAPIs";
-import { useUserContext } from '../Utils/UserContext'
-import "../Styles/login-component.css"
+import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong} from "../../Utils/ToastMessages";
+import { loginUser } from "../../API/userAPIs";
+import { useUserContext } from '../../Utils/UserContext'
+import "../../Styles/LoginPageComponents/login-component.css"
+
+
 
 const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
     const [email, setEmail] = useState("")
