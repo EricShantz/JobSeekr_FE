@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useUserContext } from '../../Utils/UserContext'
-import '../../Styles/HomePageComponents/UserIcon.css'
+import '../../Styles/HomePageComponents/userIcon.css'
 
 
 const UserIcon = () => {

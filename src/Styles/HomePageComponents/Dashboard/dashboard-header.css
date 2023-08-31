@@ -1,0 +1,32 @@
+.dashboard-header-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid rgba(128, 128, 128, 0.564) 1px;
+    border-radius: 10px;
+    height: 3rem;
+    width: 90%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.dashboard-header-option{
+    margin-left: 3rem;
+}
+
+.active-dashboard-tab{
+    color: blue;
+    text-decoration: underline solid blue;
+    text-underline-offset: 1.1rem;
+}
+
+.dashboard-header-button {
+    margin-left: auto; 
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 599px) {
+    .dashboard-header-option{
+        margin-left: 1rem;
+    }
+}

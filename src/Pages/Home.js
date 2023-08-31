@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Searchbar from "../Components/HomePageComponents/Searchbar";
 import Sidebar from "../Components/HomePageComponents/Sidebar";
-import Dashboard from "../Components/HomePageComponents/MainContent/Dashboard"
+import Dashboard from "../Components/HomePageComponents/MainContent/Dashboard/Dashboard"
 import Interviews from "../Components/HomePageComponents/MainContent/Interviews"
 import Settings from "../Components/HomePageComponents/MainContent/Settings"
-import HamburgerMenu from "../Components/HomePageComponents/HamburgerMenu"
 import MenuIcon from '@mui/icons-material/Menu';
 import UserIcon from "../Components/HomePageComponents/UserIcon"
 import 'animate.css';
@@ -47,6 +46,7 @@ const Home = () => {
           <MenuIcon className="menu-icon" onClick={toggleSideBar} />
           <Searchbar />
         </div>
+
         <div>{/*===== Main Content====== */}
           {activeMainContentComponent === "Dashboard" && 
             <Dashboard/>
@@ -57,7 +57,8 @@ const Home = () => {
           {activeMainContentComponent === "Settings" && 
             <Settings/>
           }
-          </div>
+        </div>
+        
       </div>
     ) : (
       <div className="home-page">{/* ======= Desktop View ======= */}
@@ -84,6 +85,7 @@ const Home = () => {
           {activeMainContentComponent === "Settings" && 
             <Settings/>
           }
+
           </div>
         </div>
       </div>

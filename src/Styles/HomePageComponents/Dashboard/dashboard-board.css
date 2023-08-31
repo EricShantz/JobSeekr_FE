@@ -1,0 +1,13 @@
+.dashboard-board-container{
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    background-color: bisque;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.board-column{
+    display: flex;
+    flex-direction: column;
+}
