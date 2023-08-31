@@ -1,0 +1,17 @@
+.initialsIcon{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-color: rgb(192, 193, 220);
+    border-radius: 50%;
+    width:3rem;
+    height: 3rem;
+    margin: auto;
+    
+}
+
+.initialsIcon>p{
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}

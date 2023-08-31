@@ -38,7 +38,6 @@ export async function loginUser(user_email, user_password){
       })
     })
 
-    //set JWT to localstorage?
     return response
 
   } catch (err){

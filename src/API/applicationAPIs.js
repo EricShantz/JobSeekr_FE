@@ -18,7 +18,7 @@ try{
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      //user_id will be applications table's foreign key
+      //TODO: user_id will be applications table's foreign key
     })
   })
   

@@ -37,7 +37,6 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
                 let response = await loginUser(email, password)
                 if(response.ok){
                     response = await response.json()
-                    console.log("USER", response)
 
                     localStorage.setItem('JWT', response.token)
 

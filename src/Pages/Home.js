@@ -6,12 +6,14 @@ import Interviews from "../Components/HomePageComponents/MainContent/Interviews"
 import Settings from "../Components/HomePageComponents/MainContent/Settings"
 import HamburgerMenu from "../Components/HomePageComponents/HamburgerMenu"
 import MenuIcon from '@mui/icons-material/Menu';
+import UserIcon from "../Components/HomePageComponents/UserIcon"
 import 'animate.css';
 import "../Styles/HomePageComponents/home-page.css"
 
 const Home = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeMainContentComponent, setActiveMainContentComponent] = useState("Dashboard")
 
     useEffect(() => {
       const handleResize = () => {
@@ -28,13 +30,17 @@ const Home = () => {
     const toggleSideBar = () => {
       setSidebarOpen(!sidebarOpen)
     }
+
+    const setMainContentComponent = (tabName)=>{
+      setActiveMainContentComponent(tabName)
+    }
   
   return (
     <div>
     {windowWidth <= 600 ? (
-      <div> {/* =========== Mobile View =========== */}
-        <div className={` ${sidebarOpen ? "overlay" : ''}` } onClick={toggleSideBar}/>
-        <div className={`mobile-sidebar ${!sidebarOpen ? "sidebar-closed" : "sidebar-open"}`}>
+      <div> {/* ========= Mobile View ========= */}
+        <div className={` ${sidebarOpen ? "overlay" : ''}` } onClick={toggleSideBar}/> {/*overlay when menu open */}
+        <div className={`mobile-sidebar ${!sidebarOpen ? "sidebar-closed" : "sidebar-open"}`}> {/*slie out menu */}
           <HamburgerMenu />
         </div>
         <div className="mobile-header">
@@ -43,22 +49,32 @@ const Home = () => {
         </div>
       </div>
     ) : (
-      <div className="home-page">{/* =========== Desktop View =========== */}
+      <div className="home-page">{/* ======= Desktop View ======= */}
         
         <div className="desktop-sidebar">
-           <Sidebar />
+           <Sidebar onButtonPress={setMainContentComponent}/>
          </div>
 
          <div className={`searchbar-mainContent-stack`}>
-           <div className="searchbar">
-             <Searchbar />
-           </div>
-           <div>
-            {/* Main Content */}
-            </div>
-         </div>
+          <div className="searchbar">
+            <Searchbar />
+          </div>
+          <div className="userIcon">
+            <UserIcon />
+          </div>
 
-
+          <div>{/*===== Main Content====== */}
+          {activeMainContentComponent === "Dashboard" && 
+            <Dashboard/>
+          }
+          {activeMainContentComponent === "Interviews" && 
+            <Interviews/>
+          }
+          {activeMainContentComponent === "Settings" && 
+            <Settings/>
+          }
+          </div>
+        </div>
       </div>
     )}
   </div>
