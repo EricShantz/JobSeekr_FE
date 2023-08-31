@@ -46,7 +46,7 @@ const Sidebar = ({ onButtonPress }) => {
     }
 
     return(
-        <div className="desktop-sidebar-position">
+        <div className="sidebar-position">
             <div className="title-div">
                 <img src={triangle_logo} className="triangle-logo"/>
                 <h3>JobSeekr</h3>

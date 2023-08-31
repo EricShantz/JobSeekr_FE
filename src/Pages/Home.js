@@ -41,12 +41,23 @@ const Home = () => {
       <div> {/* ========= Mobile View ========= */}
         <div className={` ${sidebarOpen ? "overlay" : ''}` } onClick={toggleSideBar}/> {/*overlay when menu open */}
         <div className={`mobile-sidebar ${!sidebarOpen ? "sidebar-closed" : "sidebar-open"}`}> {/*slie out menu */}
-          <HamburgerMenu />
+         <Sidebar onButtonPress={setMainContentComponent}/>
         </div>
         <div className="mobile-header">
           <MenuIcon className="menu-icon" onClick={toggleSideBar} />
           <Searchbar />
         </div>
+        <div>{/*===== Main Content====== */}
+          {activeMainContentComponent === "Dashboard" && 
+            <Dashboard/>
+          }
+          {activeMainContentComponent === "Interviews" && 
+            <Interviews/>
+          }
+          {activeMainContentComponent === "Settings" && 
+            <Settings/>
+          }
+          </div>
       </div>
     ) : (
       <div className="home-page">{/* ======= Desktop View ======= */}
