@@ -84,3 +84,15 @@ export const DisplaySomethingWentWrong = () => {
     theme: "light",
     });
 }
+export const DisplayApplicationCreationSuccess = () => {
+    return toast.success('Your new job application entry has been successfully submitted.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}

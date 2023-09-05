@@ -1,9 +1,12 @@
 import React, {useState} from "react";
+import { ToastContainer } from 'react-toastify';
 import DashboardHeader from "./DashboardHeader";
 import DashboardOverview from "./DashboardOverview";
 import DashboardBoard from "./DashboardBoard";
 import DashboardList from "./DashboardList";
 import NewJobModal from "./NewJobModal"
+import { DisplayApplicationCreationSuccess } from "../../../../Utils/ToastMessages";
+
 
 const Dashboard = () => {
     const [activeComponent, setActiveComponent] = useState("Overview")
@@ -25,10 +28,15 @@ const Dashboard = () => {
       setIsModalOpen(false);
   };
 
+  const newApplicationCreationSuccess = () =>{
+    DisplayApplicationCreationSuccess()
+  }
+
+
     return(
         <div>
           
-          <NewJobModal isOpen={isModalOpen} closeModal={closeModal} />
+          <NewJobModal isOpen={isModalOpen} closeModal={closeModal} newApplicationCreationSuccess={newApplicationCreationSuccess} />
           
           {newJobModalActive &&
           <div className="new-job-modal-overlay"></div>
@@ -47,7 +55,7 @@ const Dashboard = () => {
             {activeComponent === "List" && 
               <DashboardList/>
             }
-
+    <ToastContainer />
         </div>
     )
 }

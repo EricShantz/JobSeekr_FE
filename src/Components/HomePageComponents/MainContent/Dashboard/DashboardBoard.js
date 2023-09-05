@@ -6,16 +6,16 @@ const DashboardBoard = () => {
     return(
         <div className="dashboard-board-container">
             <div className="board-column">
-                <h4>Applied</h4>
+                <h3>Applied</h3>
             </div>
             <div className="board-column">
-                <h4>Interview</h4>
+                <h3>Interview</h3>
             </div>
             <div className="board-column">
-                <h4>Job Offer</h4>
+                <h3>Job Offer</h3>
             </div>
             <div className="board-column">
-                <h4>Rejected</h4>
+                <h3>Rejected</h3>
             </div>
 
         </div>

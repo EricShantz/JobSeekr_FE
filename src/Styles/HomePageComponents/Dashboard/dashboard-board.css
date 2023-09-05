@@ -1,10 +1,10 @@
 .dashboard-board-container{
     display: flex;
     flex-direction: row;
-    width: 85%;
-    background-color: bisque;
+    width: 70%;
     justify-content: space-between;
     margin: auto;
+    margin-left: 6rem;
 }
 
 .board-column{
