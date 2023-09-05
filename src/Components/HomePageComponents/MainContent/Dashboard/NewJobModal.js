@@ -11,8 +11,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useUserContext } from '../../../../Utils/UserContext'
 import { createUserApplication } from "../../../../API/applicationAPIs";
-import { DisplaySomethingWentWrong, DisplayApplicationCreationSuccess } from "../../../../Utils/ToastMessages";
+import { DisplaySomethingWentWrong } from "../../../../Utils/ToastMessages";
 import { ToastContainer } from 'react-toastify';
+import "../../../../Styles/HomePageComponents/Dashboard/new-job-modal.css"
 
 
 import dayjs from 'dayjs';
@@ -45,7 +46,7 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess }) => {
     const modalStyles = {
         content: {
             maxWidth: '70%',
-            height: 'auto', 
+            height: '77%', 
             margin: 'auto', 
         },
         overlay: {
@@ -117,91 +118,103 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess }) => {
         <Modal isOpen={isOpen} onRequestClose={closeModal} contentLabel="New Job Application" 
         style={modalStyles}>
 
-        <h2>Enter a new job application</h2>
+        <h2>New Application</h2>
+        <div className="divider"/>
 
         <div>
-            <TextField
-                className={`newJobModalInput`}
-                id="outlined-error"
-                label="Company Name *"
-                error={companyNameError} 
-                helperText={companyNameError ? 'Please input a valid company name' : ''} 
-                FormHelperTextProps={{
-                    style: { marginLeft: '0rem' }
-                }}
-                onChange={(event) => {
-                    setCompanyName(event.target.value);
-                    setCompanyNameError(false);
-                }}
-             />
-            <TextField
-                className={`newJobModalInput`}
-                id="outlined-error"
-                label="Job Title *"
-                error={jobTitleError} 
-                helperText={jobTitleError ? 'Please input a valid job title' : ''} 
-                FormHelperTextProps={{
-                    style: { marginLeft: '0rem' }
-                }}
-                onChange={(event) => {
-                    setJobTitle(event.target.value);
-                    setJobTitleError(false);
-                }}
-            />
-            <TextField
-                className={`newJobModalInput`}
-                id="outlined"
-                label="Compensation"
-                onChange={(event) => {
-                    setCompensation(event.target.value);
-                }}
-            />
-            <TextField
-                className={`newJobModalInput`}
-                id="outlined"
-                label="Job Description"
-                onChange={(event) => {
-                    setJobDescription(event.target.value);
-                }}
-            />
-            <TextField
-                className={`newJobModalInput`}
-                id="outlined"
-                label="Link to job posting"
-                onChange={(event) => {
-                    setLinkToJobPosting(event.target.value);
-                }}
-            />
-
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DatePicker']}>
-                <DatePicker
-                  label="Date Applied"
-                  value={dateApplied}
-                  onChange={handleApplicationDateChange}
+            <div className="form-container-centered">
+                <TextField
+                    className={`newJobModalInput`}
+                    id="outlined-error"
+                    label="Company Name *"
+                    error={companyNameError} 
+                    helperText={companyNameError ? 'Please input a valid company name' : ''} 
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                        setCompanyName(event.target.value);
+                        setCompanyNameError(false);
+                    }}
+                 />
+                <TextField
+                    className={`newJobModalInput`}
+                    id="outlined-error"
+                    label="Job Title *"
+                    error={jobTitleError} 
+                    helperText={jobTitleError ? 'Please input a valid job title' : ''} 
+                    FormHelperTextProps={{
+                        style: { marginLeft: '0rem' }
+                    }}
+                    onChange={(event) => {
+                        setJobTitle(event.target.value);
+                        setJobTitleError(false);
+                    }}
                 />
-              </DemoContainer>
-            </LocalizationProvider>
-
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DatePicker']}>
-                <DatePicker
-                  label="Interview Date (optional)"
-                  onChange={handleInterviewDateChange}
+                <TextField
+                    className={`newJobModalInput`}
+                    id="outlined"
+                    label="Compensation"
+                    onChange={(event) => {
+                        setCompensation(event.target.value);
+                    }}
                 />
-              </DemoContainer>
-            </LocalizationProvider>
+                <TextField
+                    className={`newJobModalInput`}
+                    id="outlined"
+                    label="Job Description"
+                    onChange={(event) => {
+                        setJobDescription(event.target.value);
+                    }}
+                />
+                <TextField
+                    className={`newJobModalInput`}
+                    id="outlined"
+                    label="Link to job posting"
+                    onChange={(event) => {
+                        setLinkToJobPosting(event.target.value);
+                    }}
+                />
+       
+                <div className="date-input-container">
+                    <div className={"date-input"}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs} >
+                            <DatePicker
+                            label="Date Applied"
+                            value={dateApplied}
+                            onChange={handleApplicationDateChange}
+                            />
+                        </LocalizationProvider>
+                    </div>
+                    <div className={"date-input"}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}  className={"date-input"}>
+                            <DatePicker
+                              label="Interview Date (optional)"
+                              onChange={handleInterviewDateChange}
+                              />
+                        </LocalizationProvider>
+                    </div>
+                </div>
 
-            <FormGroup>
-                <FormControlLabel control={<Checkbox checked={isFavorite} onChange={handleCheckboxChange} />} label="Add to favourites"/>
-            </FormGroup>
+            </div>
+            <div className="form-container-left-aligned">
+                <FormControlLabel
+                className="favourite-checkbox"
+                control={
+                    <Checkbox
+                    checked={isFavorite}
+                    onChange={handleCheckboxChange}
+                    color="primary"
+                    />}
+                    label="Add to favourites"
+                    labelPlacement="end"
+                    />
+                <div className="button-container">
+                    <Button variant="contained" className={"form-button"} onClick={handleSubmit}>Submit</Button>
+                    <Button variant="outlined" className={"form-button"} onClick={closeModal}>Cancel</Button>
+                </div>
+            </div>
         </div>
-
-            
-           
-
-        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-        <Button variant="outlined" onClick={closeModal}>Cancel</Button>
         <ToastContainer />
         </Modal>
     );
