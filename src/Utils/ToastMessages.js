@@ -48,3 +48,63 @@ export const DisplayEmailExistsError = () => {
     theme: "light",
     });
 }
+export const DisplayDataRetrievalError = () => {
+    return toast.error('Unable to retrieve user data. Please try again later.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
+export const DisplayPasswordResetLinkSent = () => {
+    return toast.success('A link to reset your password has been sent to your email.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
+export const DisplayNoEmailExists = () => {
+    return toast.error('No user with that email was found. Please try again.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
+export const DisplaySomethingWentWrong = () => {
+    return toast.error('Something went wrong. Please try again.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
+export const DisplayApplicationCreationSuccess = () => {
+    return toast.success('Your new job application entry has been successfully submitted.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}

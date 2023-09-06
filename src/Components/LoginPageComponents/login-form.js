@@ -1,32 +1,52 @@
 import React, {useState} from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import tirangle_logo from "../Assets/triangle_logo.PNG"
+import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { DisplayLoginError, DisplayLoginIncorrect} from "../Utils/ToastMessages";
-import { loginUser } from "../API/userAPIs";
-import { useUserContext } from '../Utils/UserContext'
-import "../Styles/login-component.css"
+import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong, DisplayDataRetrievalError} from "../../Utils/ToastMessages";
+import { loginUser } from "../../API/userAPIs";
+import { fetchUserApplications } from "../../API/applicationAPIs";
+import { useUserContext } from '../../Utils/UserContext'
+import "../../Styles/LoginPageComponents/login-component.css"
 
-const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
+
+
+const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
     const [email, setEmail] = useState("")
     const [emailError, setEmailError] = useState("")
 
     const [password, setPassword] = useState("")
     const [passwordError, setPasswordError] = useState("")
 
-    const { user, setUser } = useUserContext();
+    const { user, setUser, setApplicationList } = useUserContext();
+
 
 
     const navigate = useNavigate()
 
     const handleSignupClick = () => {
-        toggleLoginForm()
+        toggleShowSignupForm()
     }
 
     const handleForgotPasswordClick = () => {
         toggleForgotPasswordForm()
+    }
+
+    const handleGetUsersApplications = async(user_id) => {
+        try{
+            let response = await fetchUserApplications(user_id)
+            if(response.ok){
+                response = await response.json()
+                response.results.splice(response.results.length - 1, 1);
+                setApplicationList(response.results[0])
+            } else {
+                DisplayDataRetrievalError()
+            }
+        } catch(err){
+            DisplaySomethingWentWrong()
+            console.error("Something went wrong",err)
+        }
     }
 
     const handleLogIn = async() => {
@@ -35,8 +55,9 @@ const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
                 let response = await loginUser(email, password)
                 if(response.ok){
                     response = await response.json()
-                    //Set user to context
-                    console.log(response)
+
+                    localStorage.setItem('JWT', response.token)
+
                     const user = {
                         user_id: response.user.user_id,
                         firstName: response.user.first_name,
@@ -46,6 +67,7 @@ const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
                     }
 
                     setUser(user);
+                    handleGetUsersApplications(user.user_id)
                     navigate(`/home/${user.firstName}`)
                 } else {
                     if(response.status === 401){
@@ -57,6 +79,7 @@ const LoginForm = ({toggleLoginForm, toggleForgotPasswordForm}) => {
                 }
 
             }catch (err){
+                DisplaySomethingWentWrong()
                 console.error("Something went wrong",err)
             }
         }

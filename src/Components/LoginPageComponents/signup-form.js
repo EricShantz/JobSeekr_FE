@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import tirangle_logo from "../Assets/triangle_logo.PNG"
+import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ArrowBack } from '@mui/icons-material';
-import { registerUser } from "../API/userAPIs";
+import { registerUser } from "../../API/userAPIs";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import { DisplaySigninError, DisplayEmailExistsError } from "../Utils/ToastMessages";
+import { DisplaySigninError, DisplayEmailExistsError } from "../../Utils/ToastMessages";
+import { useUserContext } from '../../Utils/UserContext'
+
 import 'react-toastify/dist/ReactToastify.css';
-import "../Styles/signup-component.css"
+import "../../Styles/LoginPageComponents/signup-component.css"
+
 
 const SignupForm = ({toggleLoginForm}) => {
     const [firstName, setFirstName] = useState("")
@@ -25,6 +28,8 @@ const SignupForm = ({toggleLoginForm}) => {
 
     const [confirmPassword, setConfirmPassword] = useState("")
     const [confirmPasswordError, setConfirmPasswordError] = useState(false)
+
+    const { setUser } = useUserContext();
 
     const navigate = useNavigate()
 
@@ -44,6 +49,7 @@ const SignupForm = ({toggleLoginForm}) => {
                         lastName: response.user.last_name,
                         created_at: response.user.created_at,
                     }
+                    setUser(user)
                     navigate(`/home/${user.firstName}`)
                 } else {
                     if(response.status === 409){ //set error to 409 on the backend if that email has been used

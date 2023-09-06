@@ -1,0 +1,8 @@
+.search-bar{
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-right: 0.5rem;
+    margin-top: 0.3rem;
+}

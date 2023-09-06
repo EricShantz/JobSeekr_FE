@@ -1,35 +1,62 @@
 import React, {useState} from "react";
-import '../Styles/Login.css';
-import LoginForm from "../Components/login-form";
-import SignupForm from "../Components/signup-form";
-import ForgotPasswordForm from "../Components//forgot-password-form";
+import LoginForm from "../Components/LoginPageComponents/login-form";
+import SignupForm from "../Components/LoginPageComponents/signup-form";
+import ForgotPasswordForm from "../Components/LoginPageComponents/forgot-password-form";
+import PasswordLinkSent from "../Components/LoginPageComponents/password-link-sent"
+import "../Styles/LoginPageComponents/Login.css"
+
 
 
 const Login = () => {
     const [showLoginForm, setShowLoginForm] = useState(true)
     const [showForgotPassword, setShowForgotPassword] = useState(false)
+    const [showPasswordLinkSent, setShowPasswordLinkSent] = useState(false)
+    const [showSignUpForm, setShowSignUpForm] = useState(false)
 
     const toggleLoginForm = () => {
-        setShowLoginForm(!showLoginForm);
+        setShowLoginForm(true);
         setShowForgotPassword(false);
+        setShowPasswordLinkSent(false)
+        setShowSignUpForm(false)
+
     }
     const toggleForgotPasswordForm = () => {
-        setShowForgotPassword(!showForgotPassword);
-        setShowLoginForm(!showLoginForm);
+        setShowForgotPassword(true);
+        setShowLoginForm(false);
+        setShowPasswordLinkSent(false)
+        setShowSignUpForm(false)
+    }
+
+    const toggleShowPasswordLinkSent = () => {
+        setShowForgotPassword(false);
+        setShowLoginForm(false);
+        setShowPasswordLinkSent(true)
+        setShowSignUpForm(false)
+    }
+
+    const toggleShowSignupForm=()=>{
+        setShowForgotPassword(false);
+        setShowLoginForm(false);
+        setShowPasswordLinkSent(false)
+        setShowSignUpForm(true)
     }
     return (
         <div className="login-page">
             <div className="login-form-container">
-                {showLoginForm ? (
-                    <LoginForm toggleLoginForm={toggleLoginForm} toggleForgotPasswordForm={toggleForgotPasswordForm} />
+                {showLoginForm ? ( // show login form
+                    <LoginForm toggleLoginForm={toggleLoginForm} toggleForgotPasswordForm={toggleForgotPasswordForm} toggleShowSignupForm={toggleShowSignupForm} />
                 ) : null}
 
-                {showForgotPassword ? (
-                    <ForgotPasswordForm toggleForgotPasswordForm={toggleForgotPasswordForm}/>
+                {showForgotPassword ? ( // show forgot password form
+                    <ForgotPasswordForm toggleShowPasswordLinkSent={toggleShowPasswordLinkSent} toggleLoginForm={toggleLoginForm}/>
                 ) : null}
 
-                {!showLoginForm && !showForgotPassword ? (
+                {!showLoginForm && !showForgotPassword && !showPasswordLinkSent && showSignUpForm ? ( // show signup form
                     <SignupForm toggleLoginForm={toggleLoginForm} />
+                ) : null}
+
+                {!showLoginForm && !showForgotPassword && !showSignUpForm && showPasswordLinkSent ? ( //show password reset email sent 
+                    <PasswordLinkSent toggleLoginForm={toggleLoginForm}/>
                 ) : null}
             </div>
             <div className="login-image-container">

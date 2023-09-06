@@ -11,7 +11,7 @@
 .login-image-container{
    grid-column: 2;
    height: 100vh;
-   background: url('../Assets/loginImage.png') no-repeat center center;
+   background: url('../../Assets/loginImage.png') no-repeat center center;
    background-size: cover;
 }
 

@@ -2,35 +2,39 @@ import React, {useState} from "react";
 import { ArrowBack } from '@mui/icons-material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import tirangle_logo from "../Assets/triangle_logo.PNG"
+import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
-import { DisplayLoginError, DisplayLoginIncorrect} from "../Utils/ToastMessages";
-import "../Styles/forgot-password-component.css"
+import { DisplayNoEmailExists, DisplaySomethingWentWrong } from "../../Utils/ToastMessages";
+import "../../Styles/LoginPageComponents/forgot-password-component.css"
 
+import { forgotPassword } from "../../API/userAPIs";
 
-const ForgotPasswordForm = ({toggleForgotPasswordForm}) => {
+const ForgotPasswordForm = ({toggleShowPasswordLinkSent, toggleLoginForm}) => {
     const [email, setEmail] = useState("")
     const [emailError, setEmailError] = useState("")
 
     const handleBackClick = () => {
-        toggleForgotPasswordForm()
+        toggleLoginForm()
     }
 
-    const handleReset = () => {
+    const handleReset = async() => {
         if(formValidator()){
-            try{
-            //TODO: 
-                //Check if the email exists in the db
-                //if no, return toast saying user doesnt exist
-                //if yes, randly generate a password, hash it, and set it to the db
-                //send the new password to them via email service
-                //if successful, return toast saying their password has been reset and sent to email
-
+            try{           
+                const response = await forgotPassword(email)
+                if(response.ok){
+                    toggleShowPasswordLinkSent()
+                } else {
+                    if(response.status === 401){
+                        DisplayNoEmailExists()
+                    } else {
+                        DisplaySomethingWentWrong()
+                    }
+                }
             } catch (err){
-
+                DisplaySomethingWentWrong()
+                console.error("Something went wrong", err)
             }
         }
-
     }
 
     const formValidator = () => {
@@ -73,6 +77,7 @@ const ForgotPasswordForm = ({toggleForgotPasswordForm}) => {
                     }}
                 />
                 <Button variant="contained" onClick={handleReset}>Reset</Button>
+                <ToastContainer />
         </div>
     )
 }
