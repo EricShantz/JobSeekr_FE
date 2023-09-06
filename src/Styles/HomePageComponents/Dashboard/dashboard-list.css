@@ -1,0 +1,30 @@
+/* Modify your CSS to style the table */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%; /* Ensure the table doesn't overflow the container */
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Set the header width to 12% of the container */
+th {
+  width: 12%;
+  min-width: 12%; /* Ensure a minimum width for header cells */
+}
+
+/* Add hover effect to rows to indicate they are clickable */
+tbody tr:hover {
+  background-color: #f5f5f5; /* Change the background color on hover */
+  cursor: pointer;
+}

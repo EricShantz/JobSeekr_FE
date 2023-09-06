@@ -12,13 +12,14 @@ import Checkbox from '@mui/material/Checkbox';
 import { useUserContext } from '../../../../Utils/UserContext'
 import { createUserApplication } from "../../../../API/applicationAPIs";
 import { DisplaySomethingWentWrong } from "../../../../Utils/ToastMessages";
+import { fetchUserApplications } from "../../../../API/applicationAPIs"; 
 import { ToastContainer } from 'react-toastify';
 import "../../../../Styles/HomePageComponents/Dashboard/new-job-modal.css"
 
 
 import dayjs from 'dayjs';
 
-const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess }) => {
+const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, DisplayDataRetrievalError }) => {
     Modal.setAppElement('#root');
     const [companyName, setCompanyName] = useState("")
     const [companyNameError, setCompanyNameError] = useState(false)
@@ -41,7 +42,7 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess }) => {
 
     const [isFavorite, setIsFavorite] = useState(false);
 
-    const { user } = useUserContext();
+    const { user, setApplicationList } = useUserContext();
 
     const modalStyles = {
         content: {
@@ -82,6 +83,22 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess }) => {
         return isValid
     }
 
+    const handleGetUsersApplications = async(user_id) => {
+        try{
+            let response = await fetchUserApplications(user_id)
+            if(response.ok){
+                response = await response.json()
+                response.results.splice(response.results.length - 1, 1);
+                setApplicationList(response.results[0])
+            } else {
+                DisplayDataRetrievalError()
+            }
+        } catch(err){
+            DisplaySomethingWentWrong()
+            console.error("Something went wrong",err)
+        }
+    }
+
 
     const handleSubmit = async() => {
         if(validateForm()){
@@ -104,6 +121,7 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess }) => {
             if(response.ok){
                 newApplicationCreationSuccess()
                 closeModal()
+                handleGetUsersApplications(user.user_id)
             } else{
                 DisplaySomethingWentWrong()
             }

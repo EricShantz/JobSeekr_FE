@@ -3,7 +3,7 @@ const base_url = 'http://localhost:3001'
 
 const token = localStorage.getItem('JWT');
 
-export async function fetchUserApplications(user_email, user_password){
+export async function fetchUserApplications(user_id){
   try{
     if (!token) {
       //TODO: look into implementing refresh tokens if the user clicked (keep me signed in) etc etc
@@ -12,15 +12,12 @@ export async function fetchUserApplications(user_email, user_password){
       return;
     }
     
-    const response = await fetch(`${base_url}/applications/fetchUserApplications`, {
+    const response = await fetch(`${base_url}/fetchUserApplications?user_id=${user_id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        //TODO: user_id will be applications table's foreign key
-      })
+      }
     })
     
     //TODO: if response.status === 401 (token expired/missing on backend), log user out

@@ -5,11 +5,11 @@ import DashboardOverview from "./DashboardOverview";
 import DashboardBoard from "./DashboardBoard";
 import DashboardList from "./DashboardList";
 import NewJobModal from "./NewJobModal"
-import { DisplayApplicationCreationSuccess } from "../../../../Utils/ToastMessages";
+import { DisplayApplicationCreationSuccess, DisplayDataRetrievalError } from "../../../../Utils/ToastMessages";
 
 
 const Dashboard = () => {
-    const [activeComponent, setActiveComponent] = useState("Overview")
+    const [activeComponent, setActiveComponent] = useState("Overview") //TODO: set this to context when it changes
     const [newJobModalActive, setNewJobModalActive] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
     return(
         <div>
           
-          <NewJobModal isOpen={isModalOpen} closeModal={closeModal} newApplicationCreationSuccess={newApplicationCreationSuccess} />
+          <NewJobModal isOpen={isModalOpen} closeModal={closeModal} newApplicationCreationSuccess={newApplicationCreationSuccess} DisplayDataRetrievalError={DisplayDataRetrievalError} />
           
           {newJobModalActive &&
           <div className="new-job-modal-overlay"></div>

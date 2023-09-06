@@ -12,6 +12,7 @@
 
 .dashboard-header-option{
     margin-left: 3rem;
+    cursor: pointer;
 }
 
 .active-dashboard-tab{

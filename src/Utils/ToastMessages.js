@@ -48,6 +48,18 @@ export const DisplayEmailExistsError = () => {
     theme: "light",
     });
 }
+export const DisplayDataRetrievalError = () => {
+    return toast.error('Unable to retrieve user data. Please try again later.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+}
 export const DisplayPasswordResetLinkSent = () => {
     return toast.success('A link to reset your password has been sent to your email.', {
     position: "top-right",

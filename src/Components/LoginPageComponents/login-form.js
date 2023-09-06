@@ -4,8 +4,9 @@ import Button from '@mui/material/Button';
 import tirangle_logo from "../../Assets/triangle_logo.PNG"
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong} from "../../Utils/ToastMessages";
+import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong, DisplayDataRetrievalError} from "../../Utils/ToastMessages";
 import { loginUser } from "../../API/userAPIs";
+import { fetchUserApplications } from "../../API/applicationAPIs";
 import { useUserContext } from '../../Utils/UserContext'
 import "../../Styles/LoginPageComponents/login-component.css"
 
@@ -18,7 +19,8 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
     const [password, setPassword] = useState("")
     const [passwordError, setPasswordError] = useState("")
 
-    const { user, setUser } = useUserContext();
+    const { user, setUser, setApplicationList } = useUserContext();
+
 
 
     const navigate = useNavigate()
@@ -31,6 +33,22 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
         toggleForgotPasswordForm()
     }
 
+    const handleGetUsersApplications = async(user_id) => {
+        try{
+            let response = await fetchUserApplications(user_id)
+            if(response.ok){
+                response = await response.json()
+                response.results.splice(response.results.length - 1, 1);
+                setApplicationList(response.results[0])
+            } else {
+                DisplayDataRetrievalError()
+            }
+        } catch(err){
+            DisplaySomethingWentWrong()
+            console.error("Something went wrong",err)
+        }
+    }
+
     const handleLogIn = async() => {
         if(formValidator()){
             try{
@@ -39,7 +57,6 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
                     response = await response.json()
 
                     localStorage.setItem('JWT', response.token)
-
 
                     const user = {
                         user_id: response.user.user_id,
@@ -50,6 +67,7 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
                     }
 
                     setUser(user);
+                    handleGetUsersApplications(user.user_id)
                     navigate(`/home/${user.firstName}`)
                 } else {
                     if(response.status === 401){
