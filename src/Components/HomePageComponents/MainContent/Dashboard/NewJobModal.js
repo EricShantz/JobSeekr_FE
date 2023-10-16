@@ -6,8 +6,8 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { formatApplicationDate } from "../../../../Utils/DateFormatters";
 import Checkbox from '@mui/material/Checkbox';
 import { useUserContext } from '../../../../Utils/UserContext'
 import { createUserApplication } from "../../../../API/applicationAPIs";
@@ -28,13 +28,10 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, Displa
     const [jobTitleError, setJobTitleError] = useState(false)
 
     const [compensation, setCompensation] = useState("")
-    const [compensationError, setCompensationError] = useState(false)
 
     const [jobDescription, setJobDescription] = useState("")
-    const [jobDescriptionError, setJobDescriptionError] = useState(false)
 
     const [linkToJobPosting, setLinkToJobPosting] = useState("")
-    const [linkToJobPostingError, setLinkToJobPostingError] = useState(false)
     
     const [dateApplied, setDateApplied] = useState(dayjs());
 
@@ -52,6 +49,7 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, Displa
         },
         overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            zIndex:'2',
         },
     }
 
@@ -89,7 +87,9 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, Displa
             if(response.ok){
                 response = await response.json()
                 response.results.splice(response.results.length - 1, 1);
-                setApplicationList(response.results[0])
+                let formattedDateList = formatApplicationDate(response.results[0])
+                console.log("FORMATTED DATE LIST", formattedDateList)
+                setApplicationList(formattedDateList)
             } else {
                 DisplayDataRetrievalError()
             }
@@ -97,6 +97,19 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, Displa
             DisplaySomethingWentWrong()
             console.error("Something went wrong",err)
         }
+    }
+
+    const resetStateVariables = () =>{
+        setCompanyName('')
+        setCompanyNameError(false)
+        setJobTitle('')
+        setJobTitleError(false)
+        setCompensation('')
+        setJobDescription('')
+        setLinkToJobPosting('')
+        setDateApplied(dayjs())
+        setInterviewDate(null)
+        setIsFavorite(false)
     }
 
 
@@ -125,12 +138,15 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, Displa
             } else{
                 DisplaySomethingWentWrong()
             }
+
+            resetStateVariables();
         }catch(err){
             DisplaySomethingWentWrong()
             console.error("something went wrong:", err)
         }
         }
     }
+
 
     return (
         <Modal isOpen={isOpen} onRequestClose={closeModal} contentLabel="New Job Application" 
@@ -186,7 +202,7 @@ const NewJobModal = ({ isOpen, closeModal, newApplicationCreationSuccess, Displa
                     }}
                 />
                 <TextField
-                    className={`newJobModalInput`}
+                    className={`newJobModalInput linkInput`}
                     id="outlined"
                     label="Link to job posting"
                     onChange={(event) => {
