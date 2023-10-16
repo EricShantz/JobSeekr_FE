@@ -9,7 +9,6 @@ export const formatApplicationDate = (data) => {
       };
       
       const formattedDates = data.map((item)=>{
-        console.log(item.date_applied)
           const date = new Date(item.date_applied);
             const formattedDate =new Intl.DateTimeFormat('en-US', options).format(date);
 

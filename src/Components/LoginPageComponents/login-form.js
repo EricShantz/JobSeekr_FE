@@ -41,9 +41,8 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
                 response = await response.json()
                 response.results.splice(response.results.length - 1, 1);
                 let formattedDateList = formatApplicationDate(response.results[0])
-                console.log("FORMATTED DATE LIST", formattedDateList)
 
-                setApplicationList(formattedDateList)
+                setApplicationList(formattedDateList.reverse())
             } else {
                 DisplayDataRetrievalError()
             }
