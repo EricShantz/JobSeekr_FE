@@ -1,30 +1,21 @@
-/* Modify your CSS to style the table */
-.table-container {
-  overflow-x: auto;
-  max-width: 100%; /* Ensure the table doesn't overflow the container */
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  padding: 8px;
-  text-align: left;
-  white-space: nowrap;
+.table-container{
+  height:1000px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  width: 100%
 }
 
-/* Set the header width to 12% of the container */
-th {
-  width: 12%;
-  min-width: 12%; /* Ensure a minimum width for header cells */
+/* hide header behind modals */
+#root > div > div > div.searchbar-mainContent-stack > div:nth-child(3) > div > div.main-component > div > div > div > div > table > thead {
+  z-index: 0 !important;
+  position: sticky;
+  top: 0px;
 }
 
-/* Add hover effect to rows to indicate they are clickable */
-tbody tr:hover {
-  background-color: #f5f5f5; /* Change the background color on hover */
-  cursor: pointer;
+.even-row {
+  background-color: #f2f2f2;
+}
+
+
+.css-1q1u3t4-MuiTableRow-root:nth-child(odd) {
+  background-color: rgb(230, 230, 230);
 }

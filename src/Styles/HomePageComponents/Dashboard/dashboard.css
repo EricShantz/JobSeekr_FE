@@ -1,2 +1,101 @@
+body{
+    overflow-y: hidden;
+}
 
+.main-component{
+    height: 84vh;
+}
 
+@media (max-height: 2160px) {
+    .main-component{
+        height: 92vh;
+    }
+}
+
+@media (max-height: 1900px) {
+    .main-component{
+        height: 91.5vh;
+    }
+}
+@media (max-height: 1800px) {
+    .main-component{
+        height: 91vh;
+    }
+}
+@media (max-height: 1700px) {
+    .main-component{
+        height: 90.5vh;
+    }
+}
+@media (max-height: 1700px) {
+    .main-component{
+        height: 90vh;
+    }
+}
+@media (max-height: 1550px) {
+    .main-component{
+        height: 89.5vh;
+    }
+}
+@media (max-height: 1400px) {
+    .main-component{
+        height: 88.5vh;
+    }
+}
+@media (max-height: 1250px) {
+    .main-component{
+        height: 87.5vh;
+    }
+}
+@media (max-height: 1100px) {
+    .main-component{
+        height: 84vh;
+    }
+}
+@media (max-height: 950px) {
+    .main-component{
+        height: 83.5vh;
+    }
+}
+@media (max-height: 900px) {
+    .main-component{
+        height: 82vh;
+    }
+}
+@media (max-height: 850px) {
+    .main-component{
+        height: 82vh;
+    }
+}
+@media (max-height: 30px) {
+    .main-component{
+        height: 78vh;
+    }
+}
+@media (max-height: 750px) {
+    .main-component{
+        height: 77.5vh;
+    }
+}
+@media (max-height: 700px) {
+    .main-component{
+        height: 77vh;
+    }
+}
+@media (max-height: 650px) {
+    .main-component{
+        height: 75vh;
+    }
+}
+@media (max-height: 600px) {
+    .main-component{
+        height: 73vh;
+    }
+}
+ 
+@media (max-height: 550px) {
+    .main-component{
+        height: 71vh;
+    }
+}
+ 

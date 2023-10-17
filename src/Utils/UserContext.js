@@ -6,7 +6,7 @@ const UserContext = createContext();
 // Create a provider component
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [applicationList, setApplicationList] = useState(["Hey","Hi","Hello","How are you"])
+  const [applicationList, setApplicationList] = useState([])
 
   return (
     <UserContext.Provider value={{ 

@@ -6,11 +6,11 @@ import DashboardBoard from "./DashboardBoard";
 import DashboardList from "./DashboardList";
 import NewJobModal from "./NewJobModal"
 import { DisplayApplicationCreationSuccess, DisplayDataRetrievalError } from "../../../../Utils/ToastMessages";
+import "../../../../Styles/HomePageComponents/Dashboard/dashboard.css"
 
 
 const Dashboard = () => {
     const [activeComponent, setActiveComponent] = useState("Overview") //TODO: set this to context when it changes
-    const [newJobModalActive, setNewJobModalActive] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const setContentComponent = (tabName) => {
@@ -35,26 +35,30 @@ const Dashboard = () => {
 
     return(
         <div>
-          
-          <NewJobModal isOpen={isModalOpen} closeModal={closeModal} newApplicationCreationSuccess={newApplicationCreationSuccess} DisplayDataRetrievalError={DisplayDataRetrievalError} />
-          
-          {newJobModalActive &&
-          <div className="new-job-modal-overlay"></div>
-          }
+          <div>
 
-            <DashboardHeader onButtonPress={setContentComponent} showNewJobModal={showNewJobModal}/>
+          <NewJobModal 
+          isOpen={isModalOpen} 
+          closeModal={closeModal} 
+          newApplicationCreationSuccess={newApplicationCreationSuccess} 
+          DisplayDataRetrievalError={DisplayDataRetrievalError} 
+          />
 
+          <DashboardHeader onButtonPress={setContentComponent} showNewJobModal={showNewJobModal}/>
+          </div>
+
+          <div className="main-component">
             {activeComponent === "Overview" && 
             <DashboardOverview/>
             }
-
             {activeComponent === "Board" && 
               <DashboardBoard/>
             }
-
             {activeComponent === "List" && 
-              <DashboardList/>
+              <DashboardList />
             }
+          </div>
+
     <ToastContainer />
         </div>
     )

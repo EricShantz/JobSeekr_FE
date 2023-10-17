@@ -8,6 +8,7 @@ import { DisplayLoginError, DisplayLoginIncorrect, DisplaySomethingWentWrong, Di
 import { loginUser } from "../../API/userAPIs";
 import { fetchUserApplications } from "../../API/applicationAPIs";
 import { useUserContext } from '../../Utils/UserContext'
+import { formatApplicationDate } from "../../Utils/DateFormatters";
 import "../../Styles/LoginPageComponents/login-component.css"
 
 
@@ -39,7 +40,9 @@ const LoginForm = ({toggleForgotPasswordForm, toggleShowSignupForm}) => {
             if(response.ok){
                 response = await response.json()
                 response.results.splice(response.results.length - 1, 1);
-                setApplicationList(response.results[0])
+                let formattedDateList = formatApplicationDate(response.results[0])
+
+                setApplicationList(formattedDateList.reverse())
             } else {
                 DisplayDataRetrievalError()
             }
