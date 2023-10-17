@@ -11,7 +11,7 @@ import { useUserContext } from '../../../../Utils/UserContext';
 
 const columns = [
   {
-    width: 199,
+    width: 200,
     label: 'Company',
     dataKey: 'company_name',
   },
